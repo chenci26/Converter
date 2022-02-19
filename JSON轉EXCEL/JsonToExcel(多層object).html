@@ -1,0 +1,84 @@
+<html>
+
+<style>
+  .btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  h1{
+    text-align: center;
+    margin-bottom: 100px;
+  }
+  button{
+    width: 200px;
+    height: 100px;
+    margin: 10px;
+  }
+  button:hover{
+    cursor: pointer;
+  }
+</style>
+
+<head>
+  <h1 style="font-size: 20px;color: red;">使用a標籤方式將json匯出csv檔案</h1>
+  <div class="btn">
+    <button id="button">匯出翻譯缺漏</button>
+  </div>
+</head>
+
+<body>
+  <script src="./json.js"></script>
+  <script>
+    var data = []
+    
+    // 物件遞迴
+    function clearObjProperty(object, category) {
+      const objArr = Object.entries(object);
+      const objArrLen = objArr?.length;
+      for (let i = 0; i < objArrLen; i++) {
+        const [propName] = objArr[i];
+        const parent = category ? `${category}.${propName}` : propName;
+        if (object[propName] instanceof Object) {
+          this.clearObjProperty(object[propName], parent);
+        } else {
+          const value = object[propName]
+          data.push({ 1: parent, 2: value })
+        }
+      }
+      return object;
+    }
+
+    function tableToExcel(jsonData) {
+      //列標題，逗號隔開，每一個逗號就是隔開一個單元格
+      let str = '';
+      //增加\t為了不讓表格顯示科學計數法或者其他格式
+      for (let i = 0; i < jsonData?.length; i++) {
+        for (let item in jsonData[i]) {
+          str += `${jsonData[i][item] + '\t'},`;
+        }
+        str += '\n';
+      }
+      //encodeURIComponent解決中文亂碼
+      let uri = 'data:text/csv;charset=utf-8,\ufeff' + encodeURIComponent(str);
+      //通過建立a標籤實現
+      var link = document.createElement("a");
+      link.href = uri;
+      //對下載的檔案命名
+      link.download = "json資料表.csv";
+      document.body.appendChild(link);
+    }
+
+    
+    document.getElementById('button').addEventListener('click', () => {
+      clearObjProperty(jsonData)
+      tableToExcel(data)
+      const a = document.getElementsByTagName('a')[0]
+      a.click()
+    })
+
+
+  </script>
+</body>
+
+</html>

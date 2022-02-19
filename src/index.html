@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Converter</title>
+</head>
+<body>
+  <div class="converter">
+    <h1>
+      Excel轉置教學
+    </h1>
+    <div class="video">
+      <div class="hint">
+        <h3>
+          注意!!! 請只先選取一種語言就好!!!
+        </h3>
+        <h5>
+          <ul>
+            <li>Excel向下快速選取是 ctrl + shift + ↓。</li>
+            <li>只留一種語言的翻譯及key後，向下選取並複製(ctrl + c)。</li>
+            <li>開一張新的工作表點擊右鍵 。</li>
+            <li>使用 " 選擇性貼上 "。</li>
+            <li>勾選轉置。</li>
+            <li>刪除原本的工作表，並存檔。</li>
+          </ul>
+        </h5>
+      </div>
+      <div class="teaching">
+        <video controls src="video/teaching.mp4"></video>
+      </div>
+    </div>
+    <hr>
+    <h1>
+      轉JSON
+    </h1>
+    <div class="row">
+      <input type="file" id="file" name="file" accept=".xls, .xlsx" />
+      <button id="format">轉換</button>
+    </div>
+    <div class="row">
+      <textarea id="json"></textarea>
+    </div>
+  </div>
+  <style>
+    .converter{
+      margin: 10px auto;
+    }
+
+    .video{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 50px;
+    }
+
+    h1{
+      color: #333;
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    h3,h5{
+      margin: 5px 0;
+    }
+
+    .teaching{
+      flex: 0 0 40%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .teaching video{
+      width: 100%;
+      height: 100%;
+    }
+
+    .hint{
+      margin-right: 80px;
+    }
+
+
+    .row{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 50px;
+    }
+
+    textarea{
+      width: 600px;
+      height: 200px;
+    }
+  </style>
+</body>
+</html>
